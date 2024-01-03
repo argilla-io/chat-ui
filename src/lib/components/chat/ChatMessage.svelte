@@ -210,7 +210,7 @@
 							const score = message.score === 1 ? 0 : 1
 
 							dispatch("vote", { score , id })
-							window.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_up", { bubbles: true, detail: {
+							window.parent.document.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_up", { bubbles: true, detail: {
 									id,
 									message: content,
 									score: score
@@ -232,7 +232,7 @@
 						const score = message.score === -1 ? 0 : -1;
 
 						dispatch("vote", { score, id })
-						window.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_down", { bubbles: true, detail: {
+						window.parent.document.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_down", { bubbles: true, detail: {
 								id,
 								message: content,
 								score: score
