@@ -210,11 +210,15 @@
 							const score = message.score === 1 ? 0 : 1
 
 							dispatch("vote", { score , id })
-							window.parent.document.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_up", { bubbles: true, detail: {
-									id,
-									message: content,
-									score: score
-							}}));
+							const messagePack = JSON.stringify({
+									event: 'chat-ui_vote_thumbs_up',
+									detail: {
+										id,
+										message: content,
+										score: score
+									}
+							});
+							window.parent.postMessage(messagePack, '*');
 						}
 					}
 				>
@@ -228,15 +232,19 @@
 					title={message.score === -1 ? "Remove -1" : "-1"}
 					type="button"
 					on:click={() => {
-						const { content, id } = message;
-						const score = message.score === -1 ? 0 : -1;
+							const { content, id } = message;
+							const score = message.score === -1 ? 0 : -1;
 
-						dispatch("vote", { score, id })
-						window.parent.document.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_down", { bubbles: true, detail: {
-								id,
-								message: content,
-								score: score
-						}}));
+							dispatch("vote", { score, id })
+							const messagePack = JSON.stringify({
+									event: 'chat-ui_vote_thumbs_down',
+									detail: {
+										id,
+										message: content,
+										score: score
+									}
+							});
+							window.parent.postMessage(messagePack, '*');
 						}
 					}
 				>
