@@ -43,6 +43,7 @@
 	}
 
 	export let model: Model;
+	export let question = "";
 	export let message: Message;
 	export let loading = false;
 	export let isAuthor = true;
@@ -214,7 +215,7 @@
 									event: 'chat-ui_vote',
 									detail: {
 										id,
-										message,
+										question,
 										answer: content,
 										feedback: score === 1 ? "UP": "NONE"
 									}
@@ -241,7 +242,7 @@
 									event: 'chat-ui_vote',
 									detail: {
 										id,
-										message,
+										question,
 										answer: content,
 										feedback: score === -1 ? "DOWN": "NONE"
 									}

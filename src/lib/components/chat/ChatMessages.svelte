@@ -47,6 +47,7 @@
 			{/if}
 			<ChatMessage
 				loading={loading && i === messages.length - 1}
+				question={messages[i - 1]?.from === "user" ? messages[i - 1]?.content : undefined}
 				{message}
 				{isAuthor}
 				{readOnly}
