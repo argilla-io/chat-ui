@@ -211,11 +211,12 @@
 
 							dispatch("vote", { score , id })
 							const messagePack = JSON.stringify({
-									event: 'chat-ui_vote_thumbs_up',
+									event: 'chat-ui_vote',
 									detail: {
 										id,
-										message: content,
-										score: score
+										message,
+										answer: content,
+										feedback: score === 1 ? "UP": "NONE"
 									}
 							});
 							window.parent.postMessage(messagePack, '*');
@@ -237,11 +238,12 @@
 
 							dispatch("vote", { score, id })
 							const messagePack = JSON.stringify({
-									event: 'chat-ui_vote_thumbs_down',
+									event: 'chat-ui_vote',
 									detail: {
 										id,
-										message: content,
-										score: score
+										message,
+										answer: content,
+										feedback: score === -1 ? "DOWN": "NONE"
 									}
 							});
 							window.parent.postMessage(messagePack, '*');
