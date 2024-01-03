@@ -205,7 +205,18 @@
 						: ''}"
 					title={message.score === 1 ? "Remove +1" : "+1"}
 					type="button"
-					on:click={() => dispatch("vote", { score: message.score === 1 ? 0 : 1, id: message.id })}
+					on:click={() => {
+							const { content, id } = message;
+							const score = message.score === 1 ? 0 : 1
+
+							dispatch("vote", { score , id })
+							window.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_up", { bubbles: true, detail: {
+									id,
+									message: content,
+									score: score
+							}}));
+						}
+					}
 				>
 					<CarbonThumbsUp class="h-[1.14em] w-[1.14em]" />
 				</button>
@@ -216,8 +227,18 @@
 						: ''}"
 					title={message.score === -1 ? "Remove -1" : "-1"}
 					type="button"
-					on:click={() =>
-						dispatch("vote", { score: message.score === -1 ? 0 : -1, id: message.id })}
+					on:click={() => {
+						const { content, id } = message;
+						const score = message.score === -1 ? 0 : -1;
+
+						dispatch("vote", { score, id })
+						window.dispatchEvent(new CustomEvent("chat-ui_vote_thumbs_down", { bubbles: true, detail: {
+								id,
+								message: content,
+								score: score
+						}}));
+						}
+					}
 				>
 					<CarbonThumbsDown class="h-[1.14em] w-[1.14em]" />
 				</button>
